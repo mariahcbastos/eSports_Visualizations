@@ -1,0 +1,74 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Week 1 Discussion
+
+Generate 2 visualizations (a bar chart, pie chart, scatter plot, or line chart) using GGPlot. All of your axes, titles, subtitles, and captions must be labeled and all of the visualizations must be colorful and easy to read.
+
+```{r}
+library(socviz)
+library(devtools)
+library(ggplot2)
+```
+
+```{r}
+Esport <- read.csv("~/Downloads/GeneralEsportData.csv")
+Esport
+```
+
+# Chart 1
+```{r}
+chart1 <- ggplot(data = Esport,
+            mapping = aes(x = ReleaseDate, fill = Genre)) +
+  geom_bar() +
+  labs( x = "Game Release Date",
+        title = "Games Release Date and Genre",
+        subtitle = "Number of Games Release per year from 1980 and 2020",
+        caption = "Source: GeneralEsportData")
+chart1
+```
+
+
+# Chart 2
+
+```{r}
+vectorE <- c("First-Person Shooter", "Multiplayer Online Battle Arena", "Battle Royale", "Strategy")
+
+rowsE <- subset(Esport, subset = Genre %in% vectorE)
+
+head(rowsE)
+```
+
+
+
+```{r}
+chart2 <- ggplot(data = Esport,
+            mapping = aes(x = "", y = OnlineEarnings, fill = Genre)) +
+  geom_bar(stat= "identity", width=1) +
+  coord_polar("y", start= 0) + 
+  theme_void() +
+  labs( y = "OnlineEarnings",
+        title = "OnlineEarnings and Genre",
+        subtitle = "Games Genres Online Earnings",
+        caption = "Source: GeneralEsportData")
+chart2
+```
+
+
+```{r}
+chart5 <- ggplot(data = Esport,
+            mapping = aes(x = "", y = TotalEarnings, fill = Genre)) +
+  geom_bar(stat= "identity", width=1) +
+  coord_polar("y", start= 0) + 
+  theme_void() +
+  labs( y = "TotalEarnings",
+        title = "TotalEarningsand Genre",
+        subtitle = "Games Genres Total Earnings",
+        caption = "Source: GeneralEsportData")
+chart5
+```
+
+
+
